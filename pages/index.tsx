@@ -1,5 +1,7 @@
 import Home from '@/screens/home/Home'
 
-export default function HomePage() {
+const HomePage = () => {
 	return <Home />
 }
+
+export default HomePage
