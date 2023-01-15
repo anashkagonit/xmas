@@ -5,22 +5,27 @@ import { FC, useState } from 'react'
 import styles from './Search.module.scss'
 
 const Search: FC = () => {
-	const [searchTerm, setSearchTerm] = useState(' ')
-	console.log(searchTerm, setSearchTerm)
+	const [searchTerm, setSearchTerm] = useState('')
 
 	return (
 		<div className={styles.search}>
 			<InputGroup>
 				<InputLeftElement
 					pointerEvents='none'
-					children={<SearchIcon color='gray.300' />}
+					children={<SearchIcon color='gray.600' />}
 				/>
 				<Input
-					variant='outline'
+					variant='flushed'
 					type='search'
 					onChange={e => setSearchTerm(e.target.value)}
 					value={searchTerm}
 					placeholder='Search'
+					_focus={{
+						boxShadow: 'none'
+					}}
+					_focusVisible={{
+						borderColor: '#afdfd1'
+					}}
 				/>
 			</InputGroup>
 		</div>
