@@ -3,6 +3,7 @@ import { FC } from 'react'
 
 import styles from '../Cart.module.scss'
 
+import CartActions from './cart-actions/CartActions'
 import { ICartItem } from '@/types/cart.interface'
 
 const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
@@ -14,12 +15,15 @@ const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 				width={100}
 				height={100}
 			/>
-			<div className={styles.name}>{item.product.name}</div>
-			<div className={styles.price}>
-				{new Intl.NumberFormat('en-US', {
-					style: 'currency',
-					currency: 'USD'
-				}).format(item.product.price)}
+			<div className={styles.name}>
+				{item.product.name}
+				<div className={styles.price}>
+					{new Intl.NumberFormat('en-US', {
+						style: 'currency',
+						currency: 'USD'
+					}).format(item.product.price)}
+				</div>
+				<CartActions />
 			</div>
 		</div>
 	)

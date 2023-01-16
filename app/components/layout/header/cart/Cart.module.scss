@@ -1,6 +1,4 @@
 .wrapper-cart {
-
-
   .heading {
     @apply flex items-center;
   }
@@ -12,15 +10,30 @@
   .text {
     @apply tracking-widest;
   }
+}
 
-  .cart {
-    @applyp-5;
+.cart {
 
 
-    .item {}
+  .item {
+    @apply mb-4 flex items-center gap-4;
 
-    .name {}
+    .name {
+      @apply w-36 tracking-widest truncate font-semibold;
+    }
 
-    .price {}
+    .price {
+      @apply text-sm text-beige mt-1;
+    }
+  }
+}
+
+.footer {
+  >div:first-child {
+    @apply text-sm text-beige;
+  }
+
+  >div:last-child {
+    @apply text-xl font-semibold;
   }
 }
