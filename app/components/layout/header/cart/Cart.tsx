@@ -38,7 +38,7 @@ const Cart: FC = () => {
 				<DrawerOverlay />
 				<DrawerContent>
 					<DrawerCloseButton />
-					<DrawerHeader>My Cart</DrawerHeader>
+					<DrawerHeader>My Basket</DrawerHeader>
 
 					<DrawerBody>
 						<div className={styles.cart}>
@@ -48,7 +48,11 @@ const Cart: FC = () => {
 						</div>
 					</DrawerBody>
 
-					<DrawerFooter justifyContent='space-between'>
+					<DrawerFooter
+						justifyContent='space-between'
+						borderTopWidth={1}
+						borderTopColor={'#F7F4F0'}
+					>
 						<div className={styles.footer}>
 							<div>Total:</div>
 							<div>$100</div>

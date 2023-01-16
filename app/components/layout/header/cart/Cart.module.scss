@@ -16,7 +16,7 @@
 
 
   .item {
-    @apply mb-4 flex items-center gap-4;
+    @apply pt-4 flex items-center gap-4 border-b border-b-[#F7F4F0] pb-6;
 
     .name {
       @apply w-36 tracking-widest truncate font-semibold;
