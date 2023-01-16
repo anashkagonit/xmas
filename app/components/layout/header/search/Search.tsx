@@ -19,7 +19,7 @@ const Search: FC = () => {
 					variant='flushed'
 					type='search'
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setSearchTerm(e.target.value)
+						setSearchTerm((e as any).target.value)
 					}
 					value={searchTerm}
 					placeholder='Search'
