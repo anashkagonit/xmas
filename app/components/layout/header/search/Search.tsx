@@ -14,6 +14,7 @@ const Search: FC = () => {
 					pointerEvents='none'
 					children={<SearchIcon color='gray.600' />}
 				/>
+
 				<Input
 					variant='flushed'
 					type='search'

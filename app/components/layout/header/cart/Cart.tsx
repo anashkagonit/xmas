@@ -1,19 +1,58 @@
-import { FC } from 'react'
+import {
+	Button,
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay
+} from '@chakra-ui/react'
+import { FC, useRef, useState } from 'react'
 
 import styles from './Cart.module.scss'
 import CartItem from './cart-item/CartItem'
+import { cart } from '@/data/cart.data'
 
 const Cart: FC = () => {
+	const [isOpen, setIsOpen] = useState(false)
+	const btnRef = useRef<HTMLButtonElement>(null)
+
 	return (
 		<div className={styles['wrapper-cart']}>
-			<div className={styles.heading}>
+			<button
+				className={styles.heading}
+				onClick={() => setIsOpen(!isOpen)}
+				ref={btnRef}
+			>
 				<span className={styles.badge}>1</span>
 				<span className={styles.tetx}>MY BASKET </span>
-			</div>
+			</button>
 
-			<div className={styles.cart}>
-				<CartItem />
-			</div>
+			<Drawer
+				isOpen={isOpen}
+				placement='right'
+				onClose={() => setIsOpen(false)}
+				finalFocusRef={btnRef}
+			>
+				<DrawerOverlay />
+				<DrawerContent>
+					<DrawerCloseButton />
+					<DrawerHeader>My Cart</DrawerHeader>
+
+					<DrawerBody>
+						<div className={styles.cart}>
+							{cart.map(item => (
+								<CartItem item={item} key={item.id} />
+							))}
+						</div>
+					</DrawerBody>
+
+					<DrawerFooter>
+						<Button colorScheme='green'>Checkout</Button>
+					</DrawerFooter>
+				</DrawerContent>
+			</Drawer>
 		</div>
 	)
 }
