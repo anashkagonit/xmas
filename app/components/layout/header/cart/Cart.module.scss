@@ -37,3 +37,7 @@
     @apply text-xl font-semibold;
   }
 }
+
+.empty {
+  @apply text-xl font-semibold border-t mt-2 pt-2;
+}

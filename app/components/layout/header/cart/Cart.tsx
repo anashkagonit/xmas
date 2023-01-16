@@ -9,19 +9,23 @@ import {
 	DrawerOverlay
 } from '@chakra-ui/react'
 import { FC, useRef, useState } from 'react'
-import { useSelector } from 'react-redux/es/exports'
 
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 
+import { formatToCurrence } from '@/utils/format-to-currency'
+
 import styles from './Cart.module.scss'
 import CartItem from './cart-item/CartItem'
-import { cart } from '@/data/cart.data'
 
 const Cart: FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const btnRef = useRef<HTMLButtonElement>(null)
 
 	const cart = useTypedSelector(state => state.cart.items)
+
+	const total = cart.reduce((acc, item) => {
+		return acc + item.product.price * item.quantity
+	}, 0)
 
 	return (
 		<div className={styles['wrapper-cart']}>
@@ -30,7 +34,7 @@ const Cart: FC = () => {
 				onClick={() => setIsOpen(!isOpen)}
 				ref={btnRef}
 			>
-				<span className={styles.badge}>1</span>
+				<span className={styles.badge}>{cart.length}</span>
 				<span className={styles.tetx}>MY BASKET </span>
 			</button>
 
@@ -47,9 +51,11 @@ const Cart: FC = () => {
 
 					<DrawerBody>
 						<div className={styles.cart}>
-							{cart.map(item => (
-								<CartItem item={item} key={item.id} />
-							))}
+							{cart.length ? (
+								cart.map(item => <CartItem item={item} key={item.id} />)
+							) : (
+								<div className={styles.empty}>Basket is empty </div>
+							)}
 						</div>
 					</DrawerBody>
 
@@ -60,7 +66,7 @@ const Cart: FC = () => {
 					>
 						<div className={styles.footer}>
 							<div>Total:</div>
-							<div>$100</div>
+							<div>{formatToCurrence(total)}</div>
 						</div>
 						<Button colorScheme='green'>Checkout</Button>
 					</DrawerFooter>

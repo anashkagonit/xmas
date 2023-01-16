@@ -7,7 +7,7 @@ export const cart:ICartItem[] = [
   product: products[0]
 },
 { id:2,
-  quantity:2,
+  quantity:1,
   product: products[1]
 }
 ]
