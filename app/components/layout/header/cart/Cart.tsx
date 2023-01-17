@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { FC, useRef, useState } from 'react'
 
-import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { useCart } from '@/hooks/useCart'
 
 import { formatToCurrence } from '@/utils/format-to-currency'
 
@@ -21,11 +21,7 @@ const Cart: FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const btnRef = useRef<HTMLButtonElement>(null)
 
-	const cart = useTypedSelector(state => state.cart.items)
-
-	const total = cart.reduce((acc, item) => {
-		return acc + item.product.price * item.quantity
-	}, 0)
+	const { cart, total } = useCart()
 
 	return (
 		<div className={styles['wrapper-cart']}>
