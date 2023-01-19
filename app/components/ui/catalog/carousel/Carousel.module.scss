@@ -1,0 +1,37 @@
+.carousel {
+  @apply grid grid-cols-4 gap-5 mt-32;
+
+}
+
+.item {
+  @apply rounded-3xl bg-light-gray p-5 pt-0 mb-8;
+
+
+  .images {
+    @apply -mt-[4.5rem];
+  }
+
+  .heading {
+    @apply text-xl text-beige mt-3 font-bold leading-8;
+    height: 4rem;
+    overflow: hidden;
+
+  }
+
+  .description {
+    @apply mt-5 opacity-90 text-sm;
+  }
+
+  &.active {
+    @apply bg-green;
+    box-shadow: 0px 13px 26px rgba(0, 0, 0, 0.5);
+
+
+    .heading {
+      @apply text-3xl text-white leading-9;
+      height: 4.4rem;
+    }
+
+
+  }
+}

@@ -34,7 +34,7 @@ export const products: IProduct[] = [
   {
     id:4,
     description: 'Starbucks® Cold Brew Coffee with Milk 35 calories',
-    name: 'Cold Brew Coffee',
+    name: 'Cold Brew Coffee Frappuccino Almondmilk',
     images: [
       '/images/products/p4_1.png',
     ],
