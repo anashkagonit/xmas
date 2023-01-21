@@ -4,15 +4,14 @@
 }
 
 .item {
-  @apply rounded-3xl bg-light-gray p-5 pt-0 mb-8;
-  transition: all 0.15s ease-in-out;
+  @apply rounded-3xl bg-light-gray p-5 pt-0 mb-8 cursor-pointer;
+  transition: all 0.05s ease-in-out;
 
-  .images {
-    @apply -mt-[4.5rem];
-  }
+
+
 
   .heading {
-    @apply text-xl text-beige mt-3 font-bold leading-8;
+    @apply text-xl text-beige font-bold leading-8;
     height: 4rem;
     overflow: hidden;
 
@@ -26,10 +25,15 @@
     @apply bg-green bg-contain bg-no-repeat;
     box-shadow: 0px 8px 26px #033b11b3;
     transform: scale(1.15);
+    cursor: auto;
 
     background-image: linear-gradient(#02371786, #008D64 50%), url('/images/cardBackground.jpg');
     background-position: center top;
     background-size: 100%;
+
+    .images {
+      @apply -mt-[5rem];
+    }
 
     .variations {
       @apply grid grid-cols-4 gap-2.5 mt-5;

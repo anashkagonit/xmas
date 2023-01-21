@@ -1,14 +1,33 @@
-import { FC } from 'react'
+import cn from 'clsx'
+import { Dispatch, FC, SetStateAction } from 'react'
+
+import { TypeSize } from '@/store/cart/cart.types'
 
 import styles from '../Carousel.module.scss'
 
-const SIZES = ['SHORT', 'TALL', 'GRANDE', 'VENTI']
+const SIZES: TypeSize[] = ['SHORT', 'TALL', 'GRANDE', 'VENTI']
 
-const CarouselVariation: FC = () => {
+interface ICarouselVariations {
+	selectedSize: TypeSize
+	setSelectedSize: Dispatch<SetStateAction<TypeSize>>
+}
+
+const CarouselVariation: FC<ICarouselVariations> = ({
+	selectedSize,
+	setSelectedSize
+}) => {
 	return (
 		<div className={styles.variations}>
 			{SIZES.map(size => (
-				<button key={size}>{size}</button>
+				<button
+					key={size}
+					className={cn({
+						[styles.active]: selectedSize === size
+					})}
+					onClick={() => setSelectedSize(size)}
+				>
+					{size}
+				</button>
 			))}
 		</div>
 	)

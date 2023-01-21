@@ -1,0 +1,26 @@
+.navigation {
+  @apply relative;
+
+  .images {
+    @apply -mt-[4.5rem];
+  }
+
+  .arrows {
+    @apply flex items-center absolute w-full justify-between top-[6.5rem] text-white;
+
+    .arrow {
+
+      border-radius: 0.5rem;
+      border: 1px #fff solid;
+      transition: all 0.1s ease-in-out;
+      background-color: rgba(54, 141, 113, 0.7);
+
+      &:hover {
+        background-color: rgba(0, 141, 100, 0.7);
+        color: white;
+        border-color: white;
+
+      }
+    }
+  }
+}

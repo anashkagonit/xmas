@@ -3,11 +3,18 @@ import { FC } from 'react'
 
 import { COLORS } from '@/config/color.config'
 
+import { TypeSize } from '@/store/cart/cart.types'
+
 import { useActions } from '@/hooks/useActions'
 
 import { IProduct } from '@/types/product.interface'
 
-const CarouselButton: FC<{ product: IProduct }> = ({ product }) => {
+interface ICarouselButton {
+	product: IProduct
+	selectedSize: TypeSize
+}
+
+const CarouselButton: FC<ICarouselButton> = ({ product, selectedSize }) => {
 	const { addToCart } = useActions()
 	return (
 		<div className='text-center'>
@@ -15,7 +22,8 @@ const CarouselButton: FC<{ product: IProduct }> = ({ product }) => {
 				onClick={() =>
 					addToCart({
 						product,
-						quantity: 1
+						quantity: 1,
+						size: selectedSize
 					})
 				}
 				className='tracking-widest'

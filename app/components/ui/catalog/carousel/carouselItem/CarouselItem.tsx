@@ -1,46 +1,49 @@
-import { Button } from '@chakra-ui/react'
 import cn from 'clsx'
-import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useState } from 'react'
+
+import { TypeSize } from '@/store/cart/cart.types'
 
 import { useActions } from '@/hooks/useActions'
 
 import styles from '../Carousel.module.scss'
+import { useCarousel } from '../useCarousel'
 
 import CarouselButton from './CarouselButton'
 import CarouselVariation from './CarouselVariation'
-import { IProduct } from '@/types/product.interface'
+import CarouselNavigation from './carousel-navigation/CarouselNavigation'
+import { ICarouselItem } from './carousel.interface'
 
-const CarouselItem: FC<{ product: IProduct }> = ({ product }) => {
-	const isActive = product.id == 2
+const CarouselItem: FC<ICarouselItem> = ({ product, index }) => {
+	const [selectedSize, setSelectedSize] = useState<TypeSize>('SHORT')
+
+	const { selectedItemIndex } = useCarousel()
+	const { selectSlide } = useActions()
+
+	const isActive = index === selectedItemIndex
 
 	const truncate = (input: string) =>
-		isActive
-			? input
-			: input?.length > 35
-			? `${input.substring(0, 31)}...`
-			: input
+		input?.length > 35 ? `${input.substring(0, 31)}...` : input
 
 	return (
 		<div
 			className={cn(styles.item, {
 				[styles.active]: isActive
 			})}
+			onClick={() => selectSlide(index)}
+			// ariaLable='Select Item'
+			// role='button'
 		>
-			<Image
-				className={styles.images}
-				alt={product.name}
-				src={product.images[0]}
-				width={315}
-				height={315}
-			/>
+			<CarouselNavigation product={product} isActive={isActive} />
 
 			<div className={styles.heading}>{truncate(product.name)}</div>
 
 			{isActive ? (
 				<>
-					<CarouselVariation />
-					<CarouselButton product={product} />
+					<CarouselVariation
+						selectedSize={selectedSize}
+						setSelectedSize={setSelectedSize}
+					/>
+					<CarouselButton product={product} selectedSize={selectedSize} />
 				</>
 			) : (
 				<div className={styles.description}>{product.description}</div>

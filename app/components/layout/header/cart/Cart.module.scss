@@ -25,6 +25,10 @@
     .price {
       @apply text-sm text-beige mt-1;
     }
+
+    .variation {
+      @apply text-sm text-dark-green mt-1 opacity-70;
+    }
   }
 }
 

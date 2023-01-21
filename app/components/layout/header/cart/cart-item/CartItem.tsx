@@ -17,10 +17,13 @@ const CartItem: FC<{ item: ICartItem }> = ({ item }) => {
 				width={100}
 				height={100}
 			/>
-			<div className={styles.name}>
-				{item.product.name}
-				<div className={styles.price}>
-					{formatToCurrence(item.product.price)}
+			<div>
+				<div className={styles.name}>{item.product.name}</div>
+				<div className='flex justify-between align-center'>
+					<div className={styles.price}>
+						{formatToCurrence(item.product.price)}
+					</div>
+					<div className={styles.variation}>{item.size}</div>
 				</div>
 				<CartActions item={item} />
 			</div>
