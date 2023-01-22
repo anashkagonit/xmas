@@ -7,8 +7,13 @@ import { useActions } from '@/hooks/useActions'
 import { ICarouselNavigation } from '../carousel.interface'
 
 import styles from './CarouselNavigation.module.scss'
+import { products } from '@/data/product.data'
 
-const CarouselNavigation: FC<ICarouselNavigation> = ({ product, isActive }) => {
+const CarouselNavigation: FC<ICarouselNavigation> = ({
+	product,
+	isActive,
+	onSelectSlide
+}) => {
 	const { prevSlide, nextSlide } = useActions()
 
 	return (
@@ -18,19 +23,23 @@ const CarouselNavigation: FC<ICarouselNavigation> = ({ product, isActive }) => {
 					<button onClick={() => prevSlide()} className={styles.arrow}>
 						<ChevronLeftIcon fontSize={46} />
 					</button>
-					<button onClick={() => nextSlide()} className={styles.arrow}>
+					<button
+						onClick={() => nextSlide({ carouselLength: products.length })}
+						className={styles.arrow}
+					>
 						<ChevronRightIcon fontSize={46} />
 					</button>
 				</div>
 			)}
-			<Image
-				className={styles.images}
-				alt={product.name}
-				src={product.images[0]}
-				width={315}
-				height={315}
-				draggable={false}
-			/>
+			<button onClick={onSelectSlide} className={styles.images}>
+				<Image
+					alt={product.name}
+					src={product.images[0]}
+					width={315}
+					height={315}
+					draggable={false}
+				/>
+			</button>
 		</div>
 	)
 }

@@ -1,4 +1,5 @@
 import cn from 'clsx'
+import { motion } from 'framer-motion'
 import { FC, useState } from 'react'
 
 import { TypeSize } from '@/store/cart/cart.types'
@@ -25,17 +26,23 @@ const CarouselItem: FC<ICarouselItem> = ({ product, index }) => {
 		input?.length > 35 ? `${input.substring(0, 31)}...` : input
 
 	return (
-		<div
+		<motion.div
+			initial={{ scale: 1 }}
+			animate={isActive ? { scale: 1.15 } : {}}
+			transition={{ duration: 0.7, type: 'spring' }}
 			className={cn(styles.item, {
 				[styles.active]: isActive
 			})}
-			onClick={() => selectSlide(index)}
-			// ariaLable='Select Item'
-			// role='button'
 		>
-			<CarouselNavigation product={product} isActive={isActive} />
+			<CarouselNavigation
+				product={product}
+				isActive={isActive}
+				onSelectSlide={() => selectSlide(index)}
+			/>
 
-			<div className={styles.heading}>{truncate(product.name)}</div>
+			<button className={styles.heading} onClick={() => selectSlide(index)}>
+				<span>{truncate(product.name)}</span>
+			</button>
 
 			{isActive ? (
 				<>
@@ -48,7 +55,7 @@ const CarouselItem: FC<ICarouselItem> = ({ product, index }) => {
 			) : (
 				<div className={styles.description}>{product.description}</div>
 			)}
-		</div>
+		</motion.div>
 	)
 }
 
