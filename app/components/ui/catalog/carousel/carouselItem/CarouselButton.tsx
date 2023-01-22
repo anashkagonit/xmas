@@ -6,6 +6,7 @@ import { COLORS } from '@/config/color.config'
 import { TypeSize } from '@/store/cart/cart.types'
 
 import { useActions } from '@/hooks/useActions'
+import { useCart } from '@/hooks/useCart'
 
 import { IProduct } from '@/types/product.interface'
 
@@ -15,16 +16,26 @@ interface ICarouselButton {
 }
 
 const CarouselButton: FC<ICarouselButton> = ({ product, selectedSize }) => {
-	const { addToCart } = useActions()
+	const { addToCart, removeFromCart } = useActions()
+
+	const { cart } = useCart()
+
+	const currentElement = cart.find(
+		cartItem =>
+			cartItem.product.id === product.id && cartItem.size === selectedSize
+	)
+
 	return (
 		<div className='text-center'>
 			<Button
 				onClick={() =>
-					addToCart({
-						product,
-						quantity: 1,
-						size: selectedSize
-					})
+					currentElement
+						? removeFromCart({ id: currentElement.id })
+						: addToCart({
+								product,
+								quantity: 1,
+								size: selectedSize
+						  })
 				}
 				className='tracking-widest'
 				color={COLORS.green}
@@ -34,7 +45,7 @@ const CarouselButton: FC<ICarouselButton> = ({ product, selectedSize }) => {
 				fontSize={12}
 				marginTop={10}
 			>
-				Add to basket
+				{currentElement ? 'Remove from basket' : '	Add to basket'}
 			</Button>
 		</div>
 	)
