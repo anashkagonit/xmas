@@ -1,11 +1,10 @@
-import { cart } from "@/data/cart.data";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAddToCartPayload, IChangeQuantityPayload, ICartInitialState,  IChangeSizePayload } from "./cart.types";
 
 
 const initialState: ICartInitialState = {
-  items: cart
+  items: []
 }
 
 export const cartSlice = createSlice({
